@@ -1,0 +1,27 @@
+{
+    "id": 1,
+    "cars": [
+        {
+            "brand": "asd",
+            "model": "asd",
+            "year": "asd",
+            "volume": "asd",
+            "color": "asd",
+            "body": "asd",
+            "mileage": "asd",
+            "price": "asd",
+            "ID": "0"
+        },
+        {
+            "brand": "asd",
+            "model": "asd",
+            "year": "asd",
+            "volume": "asd",
+            "color": "BBBBBBBBBBBLLLLLLLLLLLLLAAAAAACCCCCCCKKKKKKKK",
+            "body": "asd",
+            "mileage": "asd",
+            "price": "asd",
+            "ID": "1"
+        }
+    ]
+}
