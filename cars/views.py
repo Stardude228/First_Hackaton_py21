@@ -16,11 +16,10 @@ def car_create():
     return 'Car has been created successfully!'
 
 def car_listing():
-    file = open('db.json')
-    data = json.load(file)
-    pprint(data['cars'])
-    file.close()
-
+    with open('db.json') as file:
+        data = json.load(file)
+        return(data['cars'])
+        
 def car_retrieve():
     user_choice = input('Type an ID of a car that you want to find \n(if you wish to look at the list of all cars try car_listing): ')
     # Opening a database
@@ -34,9 +33,9 @@ def car_retrieve():
     for i in data:
         if user_choice in i['ID']:
             found = True
-            pprint(i)
+            return(i)
     if found == False:
-        print('There is no such ID')
+        return('There is no such ID')
     file.close()
     # Search of ID
 
@@ -48,14 +47,13 @@ def car_update():
     # Opening a database
     file = open('db.json')
     data = json.load(file)
-    data = data['cars']
     file.close()
     # Opening a database
 
     # Search of ID and change of setting 
     found = False
-    for i in data:
-        if user_choice in i['ID']:
+    for i in data["cars"]:
+        if user_choice in i["ID"]:
             found = True
             i[user_change] = user_setting
     if found == False:
@@ -63,38 +61,36 @@ def car_update():
     # Search of ID and change of setting 
 
     # Sending a changed setting
-    pprint(data)
-    # db1 = open("db.json", 'w')
-    # pprint(db1)
-    # res = json.dumps(data)
-    # db1.write(res)
-    # db1.close()
-    # file.close()
+    res = json.dumps(data)
+    db1 = open("db.json", 'w')
+    db1.write(res)
+    db1.close()
+    return('You successfully changed one of the settings!')
     # Sending a changed setting
 
-# def car_delete():
-#     user_choice = input('Type an ID of a car that you want to delete \n(if you wish to look at the list of all cars try car_listing): ')
-#     # Opening a database
-#     file = open('db.json')
-#     data = json.load(file)
-#     data = data['cars']
-#     # Opening a database
+def car_delete():
+    user_choice = input('Type an ID of a car that you want to delete \n(if you wish to look at the list of all cars try car_listing): ')
 
-#     # Search of ID
-#     found = False
-#     for i in data:
-#         if user_choice in i['ID']:
-#             found = True
-#             pprint(data)
-#             data.remove(i)
-#             pprint(data)
-#     if found == False:
-#         print('There is no such ID')
-#     file.close()
-#     # Search of ID
+    # Opening a database
+    file = open('db.json')
+    data = json.load(file)
+    file.close()
+    # Opening a database
 
-# car_create()
-# car_listing()
-# car_retrieve()
-car_update()
-# car_delete()
+    # Search of ID and change of setting 
+    found = False
+    for i in data["cars"]:
+        if user_choice in i["ID"]:
+            found = True
+            data['cars'].remove(i)
+    if found == False:
+        return('There is no such ID')
+    # Search of ID and change of setting 
+
+    # Sending a changed setting
+    res = json.dumps(data)
+    db1 = open("db.json", 'w')
+    db1.write(res)
+    db1.close()
+    return('You successfully deleted one of the items!')
+    # Sending a changed setting
